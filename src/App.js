@@ -5,6 +5,7 @@ import EmployeeList from './components/EmployeeList/EmployeeList';
 import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import AddEmployee from './components/AddEmployee/AddEmployee';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
       <Route path="/" element={<EmployeeList />} />
       <Route path="/employees" element={<EmployeeList />} />
+      <Route path="/add-employee" element={<AddEmployee />} />
       </Routes>
        <Footer/>
     </Fragment>
