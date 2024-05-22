@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import Employee from '../Employee/Employee'
 
 
@@ -8,7 +9,13 @@ import { listEmployees } from '../../services/EmployeeService/EmployeeService'
 
 const EmployeeList = () => {
   const [employeeData,setEmployeeData] = useState([]);  
+  const navigate =useNavigate();
 
+
+
+  const navigateToAddEmployee=()=>{
+    navigate("/add-employee")
+  }
   const fetchEmployees = async()=>{
     try{
          const {data} =  await listEmployees()
@@ -26,7 +33,7 @@ const EmployeeList = () => {
   return (
     <div className='container mt-4'>
     <h1 className='text-center'>List of Employees</h1>
-   
+    <button className='btn btn-primary mb-2'  onClick={navigateToAddEmployee}>Add Employee</button>
     <table className='table table-striped table-bordered'>
         <thead>
              <tr>
