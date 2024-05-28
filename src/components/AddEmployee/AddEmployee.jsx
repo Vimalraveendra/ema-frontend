@@ -28,7 +28,33 @@ const AddEmployee = () => {
                 setEmployeeDetails(defaultEmployeeDetails)
                }
         
+               const validateFormData= ()=>{
+                let valid =true;
+                let errorsCopy={...errors};
+                const{firstName,lastName,email} = employeeDetails
+                if(firstName.trim()){
+                    errorsCopy.firstName="";
+                }else{
+                    errorsCopy.firstName="First name is required"
+                    valid =false;
+                }
         
+                if(lastName.trim()){
+                    errorsCopy.lastName="";
+                }else{
+                    errorsCopy.lastName="Last name is required"
+                    valid =false;
+                }
+        
+                if(email.trim()){
+                    errorsCopy.email="";
+                }else{
+                    errorsCopy.email="Email is required"
+                    valid =false;
+                }
+                setErrors(errorsCopy)
+                return valid;
+            }
   
 
   return (
