@@ -1,4 +1,7 @@
 import React,{useState} from 'react'
+import { createEmployee } from '../../services/EmployeeService/EmployeeService';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const defaultEmployeeDetails = {
@@ -9,11 +12,24 @@ const defaultEmployeeDetails = {
 const AddEmployee = () => {
     const [employeeDetails,setEmployeeDetails] = useState(defaultEmployeeDetails)
     const [errors,setErrors] =useState(defaultEmployeeDetails);
+    const navigate = useNavigate();
 
     const handleOnChange=(event)=>{
         const { name, value } = event.target;
         setEmployeeDetails({...employeeDetails,[name]:value})
     }
+
+    const saveEmployee=async(e)=>{
+      e.preventDefault(); 
+                const{data} = await createEmployee(employeeDetails)
+                if(data.id){
+                    navigate("/employees")
+                }
+                setEmployeeDetails(defaultEmployeeDetails)
+               }
+        
+        
+  
 
   return (
     <div className="container">
@@ -61,7 +77,7 @@ const AddEmployee = () => {
                                     />
                                    { errors.email && <div className="invalid-feedback">{errors.email}</div>}
                            </div>   
-                            <button  className="btn btn-success" >Submit</button>      
+                            <button  className="btn btn-success" onClick={saveEmployee} >Submit</button>      
                    </form>
             </div>
         </div>
