@@ -21,10 +21,13 @@ const AddEmployee = () => {
 
     const saveEmployee=async(e)=>{
       e.preventDefault(); 
-                const{data} = await createEmployee(employeeDetails)
-                if(data.id){
-                    navigate("/employees")
-                }
+                if(validateFormData()){
+                    if(id){
+                     const{data} = await updateEmployee(id,employeeDetails)
+                        if(data.id){
+                         navigate("/employees")
+                     }
+                    }
                 setEmployeeDetails(defaultEmployeeDetails)
                }
         
