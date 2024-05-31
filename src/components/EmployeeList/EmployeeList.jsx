@@ -11,7 +11,9 @@ const EmployeeList = () => {
   const [employeeData,setEmployeeData] = useState([]);  
   const navigate =useNavigate();
 
-
+  const updateEmployee=(id)=>{
+    navigate(`/edit-employee/${id}`)
+}
 
   const navigateToAddEmployee=()=>{
     navigate("/add-employee")
@@ -53,6 +55,7 @@ const EmployeeList = () => {
                      firstName={firstName}
                      lastName={lastName}
                      email={email}
+                     updateEmployee={updateEmployee}
                      />
               })
            }
