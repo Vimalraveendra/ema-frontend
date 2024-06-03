@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
-import { createEmployee } from '../../services/EmployeeService/EmployeeService';
-import { useNavigate } from 'react-router-dom';
+import { createEmployee,updateEmployee } from '../../services/EmployeeService/EmployeeService';
+import { useNavigate ,useParams} from 'react-router-dom';
 
 
 
@@ -13,22 +13,31 @@ const AddEmployee = () => {
     const [employeeDetails,setEmployeeDetails] = useState(defaultEmployeeDetails)
     const [errors,setErrors] =useState(defaultEmployeeDetails);
     const navigate = useNavigate();
+    const {id}= useParams();
 
     const handleOnChange=(event)=>{
         const { name, value } = event.target;
         setEmployeeDetails({...employeeDetails,[name]:value})
     }
 
-    const saveEmployee=async(e)=>{
-      e.preventDefault(); 
-                if(validateFormData()){
-                    const{data} = await createEmployee(employeeDetails)
-                 if(data.id){
-                     navigate("/employees")
+    const saveOrUpdateEmployee=async(e)=>{
+        e.preventDefault();
+          if(validateFormData()){
+                 if(id){
+                  const{data} = await updateEmployee(id,employeeDetails)
+                     if(data.id){
+                      navigate("/employees")
+                  }
+                 }else{
+                  const{data} = await createEmployee(employeeDetails)
+                  if(data.id){
+                      navigate("/employees")
+                  }
+                  setEmployeeDetails(defaultEmployeeDetails)
                  }
-                }
-                setEmployeeDetails(defaultEmployeeDetails)
-               }
+          }
+ 
+      }
         
                const validateFormData= ()=>{
                 let valid =true;
@@ -105,7 +114,7 @@ const AddEmployee = () => {
                                     />
                                    { errors.email && <div className="invalid-feedback">{errors.email}</div>}
                            </div>   
-                            <button  className="btn btn-success" onClick={saveEmployee} >Submit</button>      
+                            <button  className="btn btn-success" onClick={saveOrUpdateEmployee} >Submit</button>      
                    </form>
             </div>
         </div>
