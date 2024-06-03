@@ -11,3 +11,11 @@ export const createEmployee= async(employee)=>{
         console.log(error)
       }
   }
+
+  export const updateEmployee=async(employeeId,employee)=>{
+    try{
+      return   await axios.put(REST_API_BASE_URL + '/' + employeeId , employee);
+    }catch(error){
+      console.log(error)
+    }
+}
