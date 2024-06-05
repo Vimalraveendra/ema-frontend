@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { createEmployee,updateEmployee } from '../../services/EmployeeService/EmployeeService';
+import React,{useState,useEffect} from 'react'
+import { createEmployee,updateEmployee ,getEmployee} from '../../services/EmployeeService/EmployeeService';
 import { useNavigate ,useParams} from 'react-router-dom';
 
 
@@ -67,7 +67,21 @@ const AddEmployee = () => {
                 return valid;
             }
   
-
+            useEffect(()=>{
+                if(id){
+                const fetchEmployee = async()=>{
+                    const fetchedEmployee =  await getEmployee(id)
+                    setEmployeeDetails({
+                        firstName:fetchedEmployee.firstName,
+                        lastName:fetchedEmployee.lastName,
+                        email:fetchedEmployee.email
+                    })
+                   } 
+                   fetchEmployee();
+                }
+              
+                   return ()=>{}
+            },[id])
   return (
     <div className="container">
     <div className="row mt-5">
