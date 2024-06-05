@@ -12,6 +12,16 @@ export const createEmployee= async(employee)=>{
       }
   }
 
+
+  export const getEmployee=async(employeeId)=>{
+    try{
+      const {data} = await axios.get(REST_API_BASE_URL + '/ ' + employeeId);
+      return data;
+    }catch(error){
+      console.log(error);
+    }
+  }
+  
   export const updateEmployee=async(employeeId,employee)=>{
     try{
       return   await axios.put(REST_API_BASE_URL + '/' + employeeId , employee);
