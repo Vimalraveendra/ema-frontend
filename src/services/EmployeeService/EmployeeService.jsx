@@ -29,3 +29,6 @@ export const createEmployee= async(employee)=>{
       console.log(error)
     }
 }
+
+export const deleteEmployee =(employeeId)=> axios.delete(REST_API_BASE_URL + '/' + employeeId );
+      
